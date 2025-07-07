@@ -1,5 +1,5 @@
 {
-  "name": "@capgo/native-purchases",
+  "name": "@zhongpy/capacitor-native-purchases",
   "version": "7.1.23",
   "description": "In-app Subscriptions Made Easy",
   "main": "dist/plugin.cjs.js",
@@ -13,14 +13,14 @@
     "ios/Plugin/",
     "CapgoNativePurchases.podspec"
   ],
-  "author": "Martin Donadieu <martin@capgo.app>",
+  "author": "Zhongpy <>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Cap-go/native-purchases.git"
+    "url": "git+https://github.com/zhongpy/capacitor-native-purchases.git"
   },
   "bugs": {
-    "url": "https://github.com/Cap-go/native-purchases/issues"
+    "url": "https://github.com/zhongpy/capacitor-native-purchases/issues"
   },
   "keywords": [
     "capacitor",
