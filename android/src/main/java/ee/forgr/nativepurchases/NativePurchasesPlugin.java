@@ -108,7 +108,9 @@ public class NativePurchasesPlugin extends Plugin {
       // Grant entitlement to the user, then acknowledge the purchase
       //     if sub then acknowledgePurchase
       //      if one time then consumePurchase
-      if (purchase.isAcknowledged()) {
+      String productType = purchaseCall.getString("productType", "inapp");
+
+      if (productType.equals("inapp")) {
         ConsumeParams consumeParams = ConsumeParams.newBuilder()
           .setPurchaseToken(purchase.getPurchaseToken())
           .build();
@@ -118,7 +120,10 @@ public class NativePurchasesPlugin extends Plugin {
       }
 
       JSObject ret = new JSObject();
-      ret.put("transactionId", purchase.getPurchaseToken());
+      //ret.put("transactionId", purchase.getPurchaseToken());
+      ret.put("purchaseToken",purchase.getPurchaseToken());
+      ret.put("purchaseTime",purchase.getPurchaseTime());
+      ret.put("transactionId",purchase.getOrderId());
       if (purchaseCall != null) {
         purchaseCall.resolve(ret);
       }
@@ -245,6 +250,7 @@ public class NativePurchasesPlugin extends Plugin {
     String planIdentifier = call.getString("planIdentifier");
     String productType = call.getString("productType", "inapp");
     Number quantity = call.getInt("quantity", 1);
+    String userId = call.getString("userId", "0");
     // cannot use quantity, because it's done in native modal
     Log.d("CapacitorPurchases", "purchaseProduct: " + productIdentifier);
     if (productIdentifier == null || productIdentifier.isEmpty()) {
@@ -330,7 +336,7 @@ public class NativePurchasesPlugin extends Plugin {
               productDetailsParamsList.add(productDetailsParams.build());
             }
             BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
-              .setProductDetailsParamsList(productDetailsParamsList)
+              .setProductDetailsParamsList(productDetailsParamsList).setObfuscatedAccountId(userId)
               .build();
             // Launch the billing flow
             BillingResult billingResult2 = billingClient.launchBillingFlow(

@@ -275,6 +275,7 @@ export interface NativePurchasesPlugin {
     planIdentifier?: string;
     productType?: PURCHASE_TYPE;
     quantity?: number;
+    userId?: string;
   }): Promise<Transaction>;
 
   /**

@@ -28,6 +28,7 @@ export class NativePurchasesWeb
     productIdentifier: string;
     planIdentifier: string;
     quantity: number;
+    userId: string;
   }): Promise<{ transactionId: string }> {
     console.error("purchaseProduct only mocked in web" + options);
     return { transactionId: "transactionId" };
