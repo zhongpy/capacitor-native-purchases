@@ -57,10 +57,10 @@ public class NativePurchasesPlugin extends Plugin {
     try {
       //        Log.i(CapacitorUpdater.TAG, "semaphoreReady count " + CapacitorUpdaterPlugin.this.semaphoreReady.getCount());
       NativePurchasesPlugin.this.semaphoreReady.awaitAdvanceInterruptibly(
-          NativePurchasesPlugin.this.semaphoreReady.getPhase(),
-          waitTime.longValue(),
-          TimeUnit.SECONDS
-        );
+        NativePurchasesPlugin.this.semaphoreReady.getPhase(),
+        waitTime.longValue(),
+        TimeUnit.SECONDS
+      );
       //        Log.i(CapacitorUpdater.TAG, "semaphoreReady await " + res);
       Log.i(
         NativePurchasesPlugin.TAG,
@@ -121,9 +121,9 @@ public class NativePurchasesPlugin extends Plugin {
 
       JSObject ret = new JSObject();
       //ret.put("transactionId", purchase.getPurchaseToken());
-      ret.put("purchaseToken",purchase.getPurchaseToken());
-      ret.put("purchaseTime",purchase.getPurchaseTime());
-      ret.put("transactionId",purchase.getOrderId());
+      ret.put("purchaseToken", purchase.getPurchaseToken());
+      ret.put("purchaseTime", purchase.getPurchaseTime());
+      ret.put("transactionId", purchase.getOrderId());
       if (purchaseCall != null) {
         purchaseCall.resolve(ret);
       }
@@ -312,8 +312,9 @@ public class NativePurchasesPlugin extends Plugin {
             > productDetailsParamsList = new ArrayList<>();
             for (ProductDetails productDetailsItem : productDetailsList) {
               BillingFlowParams.ProductDetailsParams.Builder productDetailsParams =
-                BillingFlowParams.ProductDetailsParams.newBuilder()
-                  .setProductDetails(productDetailsItem);
+                BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(
+                  productDetailsItem
+                );
               if (productType.equals("subs")) {
                 // list the SubscriptionOfferDetails and find the one who match the planIdentifier if not found get the first one
                 ProductDetails.SubscriptionOfferDetails selectedOfferDetails =
@@ -336,7 +337,8 @@ public class NativePurchasesPlugin extends Plugin {
               productDetailsParamsList.add(productDetailsParams.build());
             }
             BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
-              .setProductDetailsParamsList(productDetailsParamsList).setObfuscatedAccountId(userId)
+              .setProductDetailsParamsList(productDetailsParamsList)
+              .setObfuscatedAccountId(userId)
               .build();
             // Launch the billing flow
             BillingResult billingResult2 = billingClient.launchBillingFlow(
