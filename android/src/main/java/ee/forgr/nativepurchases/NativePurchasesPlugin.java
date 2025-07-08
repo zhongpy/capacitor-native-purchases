@@ -108,9 +108,7 @@ public class NativePurchasesPlugin extends Plugin {
       // Grant entitlement to the user, then acknowledge the purchase
       //     if sub then acknowledgePurchase
       //      if one time then consumePurchase
-      String productType = purchaseCall.getString("productType", "inapp");
-
-      if (productType.equals("inapp")) {
+      if (purchase.isAcknowledged()) {
         ConsumeParams consumeParams = ConsumeParams.newBuilder()
           .setPurchaseToken(purchase.getPurchaseToken())
           .build();
